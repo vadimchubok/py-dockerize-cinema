@@ -5,10 +5,11 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
+# оновлюємо pip і ставимо залежності для psycopg2-binary
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-       gcc \
-       libpq-dev \
+    && apt-get install -y --no-install-recommends libpq-dev \
+    && pip install --upgrade pip \
+    && pip install --no-cache-dir psycopg2-binary \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
